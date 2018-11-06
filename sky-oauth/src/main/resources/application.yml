@@ -1,0 +1,76 @@
+
+
+spring:
+  application:
+    name: oauth-server
+# 数据源
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/xcloud_base
+
+    username: root
+    # Jasyp加密 可到xcloud-common服务中找到JasyptUtil生成加密结果
+    password: ENC(kFhLGJygLu03ITswbPIJNS+OGNxH+0ph)
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    # Druid StatViewServlet配置
+    druid:
+      stat-view-servlet:
+        # 默认true 内置监控页面首页/druid/index.html
+        enabled: true
+        url-pattern: /druid/*
+        # 允许清空统计数据
+        reset-enable: true
+        login-username: root
+        login-password: ENC(kFhLGJygLu03ITswbPIJNS+OGNxH+0ph)
+        # IP白名单 多个逗号分隔
+        allow:
+        # IP黑名单
+        deny:
+  # Redis
+  redis:
+    host: 127.0.0.1
+    password:
+    # 数据库索引 默认0
+    database: 0
+    port: 6379
+    timeout: 10000
+  activemq:
+    broker-url:
+  resource:
+    id: lsl
+
+server:
+  port: 1003
+
+eureka:
+  instance:
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1000/eureka/
+
+# OAuth配置
+xcloud:
+  oauth:
+    clientId: ENC(6+MZAAAvXC0kAtA+qgVSxA==)
+    secret: ENC(u+7DHvCv+WmUYHDDW89GBQ==)
+    # 无用可以随意设置
+    scope: xcloud
+
+# Swagger界面内容配置
+swagger:
+  title: SkyCloud Gateway API接口文档
+  description: SkyCloud Gateway Api Documentation
+  version: 1.0.0
+  termsOfServiceUrl: https://www.hsdiot.com/
+  contact:
+    name: SkyCloud
+    url: https://www.hsdiot.com/
+    email: 781416550@qq.com
+jasypt:
+  encryptor:
+    password: xcloud
+
+access_token:
+  validity_period: 3600
