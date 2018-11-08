@@ -1,0 +1,36 @@
+server:
+  port: 3333
+
+spring:
+  application:
+    name: wd-gateway
+  cloud:
+
+
+      gateway:
+        locator:
+          enabled: true
+        routes:
+        - id: wd-user
+          uri: lb://wd-user
+          predicates:
+          - Path=/user/**
+          filters:
+          - SwaggerHeaderFilter
+          - StripPrefix=1
+
+        - id: wd-admin
+          uri: lb://wd-admin
+          predicates:
+          - Path=/admin/**
+          filters:
+          - SwaggerHeaderFilter
+          - StripPrefix=1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka/
+
